@@ -1,8 +1,5 @@
 <?php
-$db=mysql_connect('localhost','root','') or die('unable to connect');
-mysql_select_db('massadb',$db) or die(mysql_error($db));
-mysql_query("SET NAMES 'utf8'");
-mysql_query('SET CHARACTER SET utf8');
+include('config.php');
 ?>
 
 <?php
@@ -11,7 +8,7 @@ $query='insert into volunteeringopportunities
 (OpportunityName ,volunteerprovider ,opportunitystatus ,opportunityType ,opportunityNo ,AgeRequired ,SexRequired ,city ,tasks ,conditions ,StartDate ,EndDate ,VolunteerHours) values
 	("'.$_POST['OpportunityName'].'",'.$_POST['volunteerprovider'].',"'.$_POST['opportunitystatus'].'",'.$_POST['opportunityType'].','.$_POST['opportunityNo'].',"'.$_POST['AgeRequired'].'","'.$_POST['SexRequired'].'","'.$_POST['city'].'","'.$_POST['tasks'].'","'.$_POST['conditions'].'","'.$_POST['StartDate'].'","'.$_POST['EndDate'].'","'.$_POST['VolunteerHours'].'")';
 
-$result=mysql_query($query,$db) or die(mysql_error($db));
+$result=mysqli_query($db,$query) or die(mysqli_error($db));
 $msg='<h3>لقد تمت عملية الاضافة بنجاح</h3>';
 echo "<meta http-equiv='refresh' content='2'>";
 }
@@ -157,11 +154,11 @@ echo "<meta http-equiv='refresh' content='2'>";
 			<div>مقدم الفرصة</div>
 			   <?php
 			  $query='select * from volunteerprovider';
-			  $result=mysql_query($query,$db) or die(mysql_error($db));
+			  $result=mysqli_query($db,$query) or die(mysqli_error($db));
 			  ?>
 		<select name="volunteerprovider" id="volunteerprovider">
 			  <?php
-			  while($row=mysql_fetch_assoc($result))
+			  while($row=mysqli_fetch_array($result))
 			  {
 			  echo'<option value='.$row['ID'].'>';
 			  echo $row['ProviderName'].'</option>';
@@ -174,11 +171,11 @@ echo "<meta http-equiv='refresh' content='2'>";
 		   <div>نوع الفرصة </div>
 			   <?php
 			  $query='select * from volunteeringopportunitiestypes';
-			  $result=mysql_query($query,$db) or die(mysql_error($db));
+			  $result=mysqli_query($db,$query) or die(mysqli_error($db));
 			  ?>
 		<select name="opportunityType" id="opportunityType">
 			  <?php
-			  while($row=mysql_fetch_assoc($result))
+			  while($row=mysqli_fetch_array($result))
 			  {
 			  echo'<option value='.$row['ID'].'>';
 			  echo $row['opportunityType'].'</option>';
