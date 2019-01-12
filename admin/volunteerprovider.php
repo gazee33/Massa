@@ -1,8 +1,5 @@
 <?php
-$db=mysql_connect('localhost','root','') or die('unable to connect');
-mysql_select_db('massadb',$db) or die(mysql_error($db));
-mysql_query("SET NAMES 'utf8'");
-mysql_query('SET CHARACTER SET utf8');
+include('config.php');
 ?>
 
 <?php
@@ -10,7 +7,7 @@ if(isset($_POST['BtnAdd'])){
 $query='insert into volunteerprovider (ProviderName, Address, Phone, Notes) values
 	("'.$_POST['ProviderName'].'","'.$_POST['Address'].'","'.$_POST['Phone'].'","'.$_POST['Notes'].'")';
 
-$result=mysql_query($query,$db) or die(mysql_error($db));
+$result=mysqli_query($db,$query) or die(mysqli_error($db));
 $msg='<h3>لقد تمت عملية الاضافة بنجاح</h3>';
 echo "<meta http-equiv='refresh' content='2'>";
 }
