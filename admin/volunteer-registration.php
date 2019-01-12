@@ -1,8 +1,5 @@
 <?php
-$db=mysql_connect('localhost','root','') or die('unable to connect');
-mysql_select_db('massadb',$db) or die(mysql_error($db));
-mysql_query("SET NAMES 'utf8'");
-mysql_query('SET CHARACTER SET utf8');
+include('config.php');
 ?>
 
 <?php
@@ -11,7 +8,7 @@ $query='insert into volunteers
 (VolunteerName ,Gender,BirthDate ,MaritalStatus ,NationalityID ,Address ,phone ,email ,QualificationID ,assessment ,specialization ,Job, phonelogin, passwordlogin) values
 	("'.$_POST['VolunteerName'].'","'.$_POST['Gender'].'","'.$_POST['BirthDate'].'","'.$_POST['MaritalStatus'].'",'.$_POST['NationalityID'].',"'.$_POST['Address'].'","'.$_POST['phone'].'","'.$_POST['email'].'",'.$_POST['QualificationID'].',"'.$_POST['assessment'].'","'.$_POST['specialization'].'","'.$_POST['Job'].'",'.$_POST['phonelogin'].',"'.$_POST['passwordlogin'].'")';
 
-$result=mysql_query($query,$db) or die(mysql_error($db));
+$result=mysqli_query($db,$query) or die(mysqli_error($db));
 $msg='<h3>لقد تمت عملية الاضافة بنجاح</h3>';
 echo "<meta http-equiv='refresh' content='2'x>";
 }
@@ -169,11 +166,11 @@ echo "<meta http-equiv='refresh' content='2'x>";
 	      <div>	الجنسية</div>
 			   <?php
 			  $query='select * from nationalities';
-			  $result=mysql_query($query,$db) or die(mysql_error($db));
+			  $result=mysqli_query($db,$query) or die(mysqli_error($db));
 			  ?>
 		<select name="NationalityID" id="NationalityID">
 			  <?php
-			  while($row=mysql_fetch_assoc($result))
+			  while($row=mysqli_fetch_array($result))
 			  {
 			  echo'<option value='.$row['NationalityID'].'>';
 			  echo $row['NationalityName'].'</option>';
@@ -189,11 +186,11 @@ echo "<meta http-equiv='refresh' content='2'x>";
            <div>المؤهل</div>
 			  <?php
 			  $query='select * from qualifications';
-			  $result=mysql_query($query,$db) or die(mysql_error($db));
+			  $result=mysqli_query($db,$query) or die(mysqli_error($db));
 			  ?>
 		<select name="QualificationID" id="QualificationID">
 			  <?php
-			  while($row=mysql_fetch_assoc($result))
+			  while($row=mysqli_fetch_array($result))
 			  {
 			  echo'<option value='.$row['QualificationID'].'>';
 			  echo $row['QualificationName'].'</option>';
